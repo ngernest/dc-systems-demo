@@ -45,15 +45,15 @@ def tycheView
   let data ← replicateM samples <| g.run 100
   pure (PlotFrequencies (feature <$> data))
 
-syntax (name := tycheCmd) "#tyche_bar " (atomic("(" &"samples" ":=" num ")"))? term (atomic(" with_feature ") term)? : command
+syntax (name := tycheCmd) "#view_distribution " (atomic("(" &"samples" ":=" num ")"))? term (atomic(" with_feature ") term)? : command
 
 open Lean Elab ProofWidgets Command in
 @[command_elab tycheCmd]
 def elabTycheCmd : CommandElab := fun
-  | stx@`(#tyche_bar%$tk $t:term) => go tk stx t none none
-  | stx@`(#tyche_bar%$tk (samples := $n:num) $t:term) => go tk stx t none (some n)
-  | stx@`(#tyche_bar%$tk $t:term with_feature $f:term) => go tk stx t (some f) none
-  | stx@`(#tyche_bar%$tk (samples := $n:num) $t:term with_feature $f:term) => go tk stx t (some f) (some n)
+  | stx@`(#view_distribution%$tk $t:term) => go tk stx t none none
+  | stx@`(#view_distribution%$tk (samples := $n:num) $t:term) => go tk stx t none (some n)
+  | stx@`(#view_distribution%$tk $t:term with_feature $f:term) => go tk stx t (some f) none
+  | stx@`(#view_distribution%$tk (samples := $n:num) $t:term with_feature $f:term) => go tk stx t (some f) (some n)
   | stx => throwError "Unexpected syntax {stx}."
   where
     go (tk : Syntax) (stx : Syntax) (gen : Term) (feature : Option Term) (samples : Option NumLit) : CommandElabM Unit := do
