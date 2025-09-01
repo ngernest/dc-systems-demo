@@ -41,7 +41,11 @@ def genLists : Gen (List Nat) :=
 
 
 
+
+
+-- Generates a `Nat` uniformly at random between `lower` and `upper`
+-- Dragging the slider in VS Code changes
 def genBetween : Gen Nat := do
-  Gen.chooseNatLt [slider|lower=5] [slider|upper=16] (by simp)
+  Gen.chooseNatLt [slider|lower=2] [slider|upper=4] (by simp)
 
 #view_distribution genBetween

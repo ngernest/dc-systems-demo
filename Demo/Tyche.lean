@@ -67,6 +67,6 @@ def elabTycheCmd : CommandElab := fun
         stx
       match samples with
       | some s => logInfoAt tk m!"Sampled {MessageData.ofSyntax s} values from {(MessageData.ofSyntax gen)}."
-      | none => logInfoAt tk m!"Sampled 1000 values from {(MessageData.ofSyntax gen)}."
+      | none => logInfoAt tk m!"Sampled 1000 random values from {(MessageData.ofSyntax gen)}."
       for f in feature do
         logInfoAt tk m!"Plotting feature: {(MessageData.ofSyntax f)}."
